@@ -126,7 +126,9 @@ plotJT <- function(data = JTRCIdf,
   
   JT_plot <- ggplot(JTRCIdf[!(is.na(JTRCIdf$post > 0)), ], 
                                    aes(x = pre, y = post, colour = classPlot)) +
-    geom_abline(data= linesdf, mapping=aes(slope=slope, intercept=intercept, linetype= factor(lineID)), col = "gray45") +
+    
+    # MW Change line size here ----
+    geom_abline(data= linesdf, mapping=aes(slope=slope, intercept=intercept, linetype= factor(lineID)), col = "gray45", size=.8) +
     {if(groupfacets) facet_wrap(.~ group , if(length(unique(JTRCIdf$group)) > 3) {2} else{1}) } +
     geom_point(size = 2.5, position = jitter) +
     {if(!groupshapes)geom_point(size = 2.5, shape = 1, colour = "gray30",  position = jitter) } +
@@ -142,7 +144,9 @@ plotJT <- function(data = JTRCIdf,
     scale_colour_manual(values = cols) +
     scale_fill_manual(values = cols) +
     scale_shape_manual(values=c(21: 25)) +
-    scale_linetype_manual(values=c(1,3,2)) +
+    
+    # MW Change line type here ----
+    scale_linetype_manual(values=c(1,3,5)) +
     guides(colour = guide_legend(order = 1), 
            shape = guide_legend(order = 2), fill = F, 
            alpha = F, linetype = guide_legend(order = 3)) + 
